@@ -1,0 +1,37 @@
+import NavBar from "./components/NavBar";
+import ProductImage from "./components/ProductImage";
+
+export default function App() {
+  return <section className="w-3/5 bg-neutral-white">
+    <NavBar />
+    <hr />
+    <main className="grid grid-cols-2 gap-32 mt-12">
+      <ProductImage />
+      <article className="mt-auto mb-auto flex flex-col gap-8">
+        <span className="tracking-widest text-sm font-bold">SNEAKER COMPANY</span>
+        <h1 className="text-neutral-black text-5xl font-bold">Fall Limited Edition Sneakers</h1>
+        <p className="">These low-profile sneakers are your perfect casual wear companion. Featuring a
+          durable rubber outer sole, they’ll withstand everything the weather can offer.</p>
+        <div className="flex gap-4 items-center">
+          <h1 className="text-neutral-black text-4xl font-bold">$125.00</h1>
+          <span className="text-neutral-white rounded-md bg-neutral-dark-blue p-2">50%</span>
+        </div>
+        <span className="text-neutral-dark-gray-blue font-bold line-through">$250.00</span>
+        <div className="flex justify-between gap-4 text-neutral-black font-semibold">
+          <div className="flex w-[30%] justify-between p-2 rounded-md bg-neutral-light-grey-blue">
+            <button className="">
+              <img src="./images/icon-minus.svg" alt="decrease amount" />
+            </button>
+            <p>0</p>
+            <button><img src="./images/icon-plus.svg" alt="increase amount" />
+            </button>
+          </div>
+          <button className="bg-orange flex items-center justify-center gap-4 p-2 rounded-md w-full">
+            <img src="./images/icon-cart.svg" alt='cart' className="" />
+            <span>Add to cart</span>
+          </button>
+        </div>
+      </article>
+    </main>
+  </section>
+}
