@@ -1,5 +1,7 @@
 import NavBar from "./components/NavBar";
 import ProductImage from "./components/ProductImage";
+import { useAppDispatch, useAppSelector } from "./hooks";
+
 export default function App() {
 
   return <section className="w-3/5 bg-neutral-white max-[640px]:w-full">
