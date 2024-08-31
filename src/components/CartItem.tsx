@@ -1,16 +1,22 @@
-export default function CartItem() {
+import { useAppDispatch } from "../hooks"
+import { cartItem, removeFromCart } from "../slices/CartSlice"
+export default function CartItem({ cart }: { cart: cartItem }) {
+    const dispatch = useAppDispatch()
+
     return (
         <div className="w-full h-2/5 flex justify-between items-center">
-            <img className="w-12 rounded-md" src="./images/image-product-1-thumbnail.jpg" alt="product image" />
+            <img className="w-12 rounded-md" src={`./images/${cart.itemImage}`} alt="product image" />
             <div>
-                <p>Fall Limited Edition Sneakers</p>
+                <p>{cart.itemName}</p>
                 <p>
-                    <span>$125.00</span>
-                    <span> x 3 </span>
-                    <span>$375.00</span>
+                    <span>${cart.price}</span>
+                    <span> x {cart.quantity}</span>
+                    <span> ${cart.price * cart.quantity}</span>
                 </p>
             </div>
-            <img className="w-4 h-4" src="./images/icon-delete.svg" alt="delete icon" />
+            <button onClick={() => { dispatch(removeFromCart(cart.itemName)) }}>
+                <img className="w-4 h-4" src="./images/icon-delete.svg" alt="delete icon" />
+            </button>
         </div>
     )
 }

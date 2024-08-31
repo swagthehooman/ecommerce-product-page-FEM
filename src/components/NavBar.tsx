@@ -26,12 +26,17 @@ export default function NavBar() {
                  w-96 h-42 rounded-md bg-neutral-white shadow-lg p-4">
                     <p className="font-bold text-neutral-dark-blue">Cart</p>
                     <hr />
-                    <div className={`pt-4 h-full w-full flex ${cartItems.length === 0 ? "flex-col gap-4" : "justify-center items-center"}`}>
-                        {/* {cartItems.length === 0 &&
-                            <p className="font-bold text-neutral-dark-gray-blue">Your cart is empty</p>
-                        } */}
-                        <CartItem />
-                        <button className="p-2 rounded-md font-bold text-neutral-dark-blue bg-orange">Checkout</button>
+                    <div className={`pt-4 h-full w-full flex ${cartItems.length === 0 ? "flex-col gap-4" : "flex-col gap-4 justify-center items-center"}`}>
+                        {cartItems.length === 0 &&
+                            <p className="text-center font-bold text-neutral-dark-gray-blue">Your cart is empty</p>
+                        }
+                        {
+                            cartItems.map(i => <CartItem cart={i} />)
+                        }
+                        {
+                            cartItems.length > 0 &&
+                            <button className="w-full p-2 rounded-md font-bold text-neutral-dark-blue bg-orange">Checkout</button>
+                        }
                     </div>
                 </div>
             }

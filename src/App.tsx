@@ -1,8 +1,40 @@
+import { useState } from "react";
 import NavBar from "./components/NavBar";
 import ProductImage from "./components/ProductImage";
 import { useAppDispatch, useAppSelector } from "./hooks";
+import { addToCart, removeFromCart, changeItemQuantity } from "./slices/CartSlice";
 
 export default function App() {
+
+  const dispatch = useAppDispatch()
+  const cartItem = useAppSelector(state => state.cartItems);
+  const [localQuantity, setLocalQuantity] = useState<number>(0);
+
+  const onAddToCartClick = () => {
+    dispatch(addToCart({
+      itemImage: "image-product-1-thumbnail.jpg",
+      itemName: "Fall Limited Edition Sneakers",
+      price: 125.0,
+      quantity: localQuantity === 0 ? 1 : localQuantity
+    }));
+    setLocalQuantity(0)
+  }
+
+  const onAddQuantityClick = () => {
+    if (cartItem.find(i => i.itemName === "Fall Limited Edition Sneakers"))
+      dispatch(changeItemQuantity({ itemName: "Fall Limited Edition Sneakers", op: 1 }))
+    else
+      setLocalQuantity(prev => prev + 1);
+  }
+
+  const onReduceQuantityClick = () => {
+    if (cartItem.find(i => i.itemName === "Fall Limited Edition Sneakers"))
+      dispatch(changeItemQuantity({ itemName: "Fall Limited Edition Sneakers", op: 2 }))
+
+    else
+      setLocalQuantity(prev => prev > 0 ? prev - 1 : 0);
+  }
+
 
   return <section className="w-3/5 bg-neutral-white max-[640px]:w-full">
     <NavBar />
@@ -23,14 +55,15 @@ export default function App() {
         </div>
         <div className="flex justify-between gap-4 text-neutral-black font-semibold max-[640px]:flex-col max-[640px]:gap-8">
           <div className="flex w-[30%] justify-between p-2 rounded-md bg-neutral-light-grey-blue max-[640px]:w-full">
-            <button className="">
+            <button onClick={onReduceQuantityClick}>
               <img src="./images/icon-minus.svg" alt="decrease amount" />
             </button>
-            <p>0</p>
-            <button><img src="./images/icon-plus.svg" alt="increase amount" />
+            <p>{cartItem.find(i => i.itemName === "Fall Limited Edition Sneakers")?.quantity ?? localQuantity}</p>
+            <button onClick={onAddQuantityClick}>
+              <img src="./images/icon-plus.svg" alt="increase amount" />
             </button>
           </div>
-          <button className="bg-orange flex items-center justify-center gap-4 p-2 rounded-md w-full">
+          <button className="bg-orange flex items-center justify-center gap-4 p-2 rounded-md w-full" onClick={onAddToCartClick}>
             <img src="./images/icon-cart.svg" alt='cart' className="text-neutral-black" />
             <span>Add to cart</span>
           </button>
