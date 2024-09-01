@@ -1,4 +1,10 @@
+import { useAppSelector, useAppDispatch } from "../hooks"
+import { nextImage, prevImage } from "../slices/ProductImageSelectionSlice"
+
 export default function ProductImage() {
+
+    const imageToShow = useAppSelector(state => state.productImage);
+
     return <section className="flex flex-col gap-8">
         <img className="rounded-lg max-[640px]:rounded-none max-[640px]:w-screen" src="./images/image-product-1.jpg" alt="product display" />
         <div className="flex justify-between max-[640px]:hidden">
