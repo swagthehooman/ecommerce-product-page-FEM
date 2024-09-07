@@ -4,12 +4,12 @@ import { useAppSelector } from "./hooks";
 
 export default function App() {
 
-  const isModalOpen = useAppSelector(state => state.productImage)
+  const productModal = useAppSelector(state => state.productImage)
 
-  return <section className="w-3/5 bg-neutral-white max-[640px]:w-full">
+  return <section className={`w-3/5 bg-neutral-white max-[640px]:w-full`}>
     {
-      isModalOpen.isModalOpen ? <ModalPicture /> :
-        <MainPage />
+      productModal.isModalOpen && <ModalPicture />
     }
+    <MainPage />
   </section>
 }

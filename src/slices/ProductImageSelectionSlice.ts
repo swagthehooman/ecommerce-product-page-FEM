@@ -48,16 +48,22 @@ export const ProductImageSelectionSlice = createSlice({
                 }
             }
         },
-        thumbnailImage: (state, action: PayloadAction<number>)=>{
+        setThumbnailImage: (_state, action: PayloadAction<number>)=>{
             return {
                 index: action.payload,
                 url: `./images/image-product-${action.payload}.jpg`,
                 isModalOpen: true
             }
+        },
+        modalState: (state)=>{
+            return {
+                ...state,
+                isModalOpen: !state.isModalOpen
+            }
         }
     }
 })
 
-export const {nextImage, prevImage} = ProductImageSelectionSlice.actions
+export const {nextImage, prevImage, modalState, setThumbnailImage} = ProductImageSelectionSlice.actions
 
 export default ProductImageSelectionSlice.reducer
